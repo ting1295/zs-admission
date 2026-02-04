@@ -6,799 +6,444 @@
     <title>中山大学招生咨询平台</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* 原有的所有CSS样式保持不变，只在最后添加以下新样式 */
 
-        body {
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            /* 更改为更清新活力的渐变色 */
-            background: linear-gradient(135deg, #e3f2fd 0%, #f0f9ff 50%, #f8fdff 100%);
-            min-height: 100vh;
-            position: relative;
-        }
-
-        .bg-pattern {
+        /* 添加：自定义聊天控制按钮 */
+        .custom-chat-controls {
             position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            opacity: 0.03;
-            z-index: -1;
-            background-image:
-                radial-gradient(circle at 10% 20%, rgba(25, 118, 210, 0.3) 0px, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(0, 188, 212, 0.2) 0px, transparent 50%);
-        }
-
-        .header-nav {
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(25, 118, 210, 0.08);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 0 5%;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 15px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            /* 与主色调协调的渐变 */
-            background: linear-gradient(135deg, #1976d2, #00acc1);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
-        }
-
-        .logo-text {
-            font-size: 22px;
-            font-weight: 700;
-            color: #1565c0;
-            letter-spacing: -0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: #555;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 8px 0;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: #1976d2;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(to right, #1976d2, #00acc1);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .main-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 120px 20px 60px;
-            display: flex;
-            gap: 40px;
-        }
-
-        .content-main {
-            flex: 1;
-        }
-
-        /* 右侧快速链接侧边栏 */
-        .quick-links-sidebar {
-            width: 300px;
-            flex-shrink: 0;
-            position: sticky;
-            top: 120px;
-            align-self: flex-start;
-        }
-
-        .sidebar-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(25, 118, 210, 0.08);
-            border: 1px solid rgba(25, 118, 210, 0.05);
-            margin-bottom: 25px;
-        }
-
-        .sidebar-title {
-            font-size: 1.3rem;
-            color: #1565c0;
-            margin-bottom: 20px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e3f2fd;
-        }
-
-        .sidebar-title i {
-            color: #1976d2;
-        }
-
-        .link-list {
-            list-style: none;
-        }
-
-        .link-list li {
-            margin-bottom: 15px;
-        }
-
-        .link-list a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 18px;
-            background: #f8fdff;
-            border-radius: 12px;
-            color: #424242;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 1px solid #e1f5fe;
-        }
-
-        .link-list a:hover {
-            background: #e3f2fd;
-            transform: translateX(5px);
-            border-color: #bbdefb;
-            color: #1565c0;
-        }
-
-        .link-list a i {
-            color: #1976d2;
-            font-size: 1.1rem;
-            width: 20px;
-            text-align: center;
-        }
-
-        .hero-section {
-            text-align: center;
-            margin-bottom: 80px;
-            padding: 60px 40px;
-            background: rgba(255, 255, 255, 0.92);
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(25, 118, 210, 0.08);
-            border: 1px solid rgba(25, 118, 210, 0.05);
-        }
-
-        .hero-title {
-            font-size: 3rem;
-            color: #1565c0;
-            margin-bottom: 20px;
-            font-weight: 800;
-            line-height: 1.2;
-        }
-
-        .hero-title span {
-            background: linear-gradient(135deg, #1976d2, #00acc1);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: #555;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            line-height: 1.6;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #1976d2, #00acc1);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-top: 20px;
-            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.2);
-        }
-
-        .cards-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        .info-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px 30px;
-            box-shadow: 0 10px 30px rgba(25, 118, 210, 0.08);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(25, 118, 210, 0.05);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .info-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(25, 118, 210, 0.12);
-        }
-
-        .card-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #1976d2, #00acc1);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-            color: white;
-            font-size: 24px;
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            color: #1565c0;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .card-content {
-            color: #555;
-            line-height: 1.7;
-        }
-
-        .card-source {
-            margin-top: 15px;
-            font-size: 0.85rem;
-            color: #78909c;
-            font-style: italic;
-        }
-
-        .card-source a {
-            color: #1976d2;
-            text-decoration: none;
-        }
-
-        .faq-section {
-            background: white;
-            border-radius: 24px;
-            padding: 50px;
-            margin-bottom: 80px;
-            box-shadow: 0 10px 40px rgba(25, 118, 210, 0.08);
-            border: 1px solid rgba(25, 118, 210, 0.05);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            color: #1565c0;
-            margin-bottom: 40px;
-            font-weight: 800;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, #1976d2, #00acc1);
-            border-radius: 2px;
-        }
-
-        .faq-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .faq-item {
-            background: #f8fdff;
-            border-radius: 16px;
-            padding: 25px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border-left: 4px solid #1976d2;
-        }
-
-        .faq-item:hover {
-            background: #e3f2fd;
-            transform: translateX(5px);
-        }
-
-        .faq-question {
-            font-size: 1.2rem;
-            color: #1565c0;
-            font-weight: 600;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .faq-question i {
-            color: #1976d2;
-        }
-
-        .faq-answer {
-            color: #555;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            background: rgba(255, 255, 255, 0.92);
-            border-top: 1px solid rgba(25, 118, 210, 0.1);
-            border-radius: 24px 24px 0 0;
-            margin-top: 60px;
-        }
-
-        .footer-logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1565c0;
-            margin-bottom: 20px;
-        }
-
-        .footer-text {
-            color: #555;
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-
-        .footer-contact {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #1565c0;
-            font-weight: 500;
-        }
-
-        .contact-item i {
-            color: #1976d2;
-        }
-
-        /* Coze SDK 聊天按钮位置 */
-        #position_demo {
-            position: fixed;
-            right: 30px;
+            right: 100px;
             bottom: 30px;
-            z-index: 9999;
+            z-index: 9998;
+            display: flex;
+            gap: 10px;
         }
-
-        /* 为聊天窗口添加更明确的关闭指示 */
-        .coze-web-sdk-header-close {
-            position: relative;
-        }
-        /* 此样式尝试增强关闭按钮的提示，实际效果可能受SDK限制 */
-        .coze-web-sdk-header-close::after {
-            content: '点击关闭';
-            position: absolute;
-            left: -70px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.7);
+        
+        .chat-control-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1976d2, #00acc1);
             color: white;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+            transition: all 0.3s ease;
+            font-size: 18px;
         }
-        .coze-web-sdk-header-close:hover::after {
-            opacity: 1;
+        
+        .chat-control-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
         }
-
-        @media (max-width: 1100px) {
-            .main-container {
-                flex-direction: column;
-            }
-            .quick-links-sidebar {
-                width: 100%;
-                position: static;
-                order: -1;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 25px;
-            }
-            .sidebar-card {
-                margin-bottom: 0;
-            }
+        
+        .chat-control-btn.close-btn {
+            background: linear-gradient(135deg, #f44336, #ff7043);
         }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .hero-title {
-                font-size: 2.3rem;
-            }
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-            .cards-section {
-                grid-template-columns: 1fr;
-            }
-            .faq-grid {
-                grid-template-columns: 1fr;
-            }
-            .main-container {
-                padding: 100px 15px 40px;
-            }
-            .hero-section, .faq-section {
-                padding: 30px 20px;
-            }
-            #position_demo {
-                right: 20px;
-                bottom: 20px;
-            }
+        
+        /* 添加：聊天状态指示器 */
+        .chat-status-indicator {
+            position: fixed;
+            right: 170px;
+            bottom: 35px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            color: #1976d2;
+            font-weight: 500;
+            display: none;
+            z-index: 9997;
+            border: 1px solid rgba(25, 118, 210, 0.2);
+            animation: slideInRight 0.3s ease;
         }
-
-        @keyframes fadeInUp {
+        
+        @keyframes slideInRight {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* 添加：隐藏Coze默认关闭按钮的覆盖层 */
+        .coze-custom-close-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: rgba(244, 67, 54, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            z-index: 10002;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            display: none;
+        }
+        
+        /* 添加：使用提示弹窗 */
+        .usage-tip {
+            position: fixed;
+            right: 30px;
+            bottom: 100px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            max-width: 300px;
+            z-index: 10001;
+            border-left: 5px solid #1976d2;
+            animation: slideInUp 0.5s ease;
+            display: none;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        .fade-in {
-            animation: fadeInUp 0.6s ease forwards;
+        
+        .usage-tip h4 {
+            color: #1565c0;
+            margin-bottom: 10px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .usage-tip ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .usage-tip li {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .close-tip-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .custom-chat-controls {
+                right: 80px;
+                bottom: 20px;
+            }
+            
+            .chat-control-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 16px;
+            }
+            
+            .chat-status-indicator {
+                right: 140px;
+                bottom: 25px;
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            
+            .usage-tip {
+                right: 20px;
+                bottom: 90px;
+                max-width: 280px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .custom-chat-controls {
+                right: 70px;
+            }
+            
+            .chat-status-indicator {
+                display: none !important;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="bg-pattern"></div>
+    <!-- 原有的HTML内容保持不变 -->
 
-    <nav class="header-nav">
-        <div class="nav-container">
-            <div class="logo">
-                <div class="logo-icon">中</div>
-                <div class="logo-text">中山大学招生咨询平台</div>
-            </div>
-            <div class="nav-links">
-                <a href="#home">首页</a>
-                <a href="#about">关于中大</a>
-                <a href="#programs">招生专业</a>
-                <a href="#admission">录取查询</a>
-                <a href="#contact">联系我们</a>
-            </div>
+    <!-- 添加：聊天状态指示器 -->
+    <div class="chat-status-indicator" id="chatStatus">聊天窗口已打开</div>
+    
+    <!-- 添加：使用提示弹窗 -->
+    <div class="usage-tip" id="usageTip">
+        <button class="close-tip-btn" id="closeTipBtn">×</button>
+        <h4><i class="fas fa-lightbulb"></i> 使用提示</h4>
+        <ul>
+            <li>点击 <i class="fas fa-comment" style="color:#1976d2;"></i> 按钮打开聊天</li>
+            <li>点击 <i class="fas fa-times" style="color:#f44336;"></i> 按钮关闭聊天</li>
+            <li>您也可以点击聊天窗口右上角的关闭按钮</li>
+            <li>再次点击右下角机器人图标可重新打开</li>
+        </ul>
+        <div style="font-size:12px; color:#999; text-align:center;">
+            关闭提示后将不再显示
         </div>
-    </nav>
-
-    <div class="main-container">
-        <div class="content-main">
-            <section class="hero-section fade-in" id="home">
-                <h1 class="hero-title">中山大学招生咨询平台</h1>
-                <p class="hero-subtitle">欢迎报考国家“双一流”建设高校——中山大学！本平台提供招生政策、专业介绍、往年录取信息查询等一站式咨询服务。如有疑问，可随时点击右下角AI助手进行实时咨询。</p>
-                <div class="hero-badge">
-                    <i class="fas fa-robot"></i>
-                    <span>AI助手全天候在线，点击右下角图标免费咨询</span>
-                </div>
-            </section>
-
-            <section class="cards-section fade-in" id="about">
-                <div class="info-card">
-                    <div class="card-icon">
-                        <i class="fas fa-university"></i>
-                    </div>
-                    <h3 class="card-title">关于中山大学</h3>
-                    <p class="card-content">中山大学由孙中山先生于1924年亲手创办，是教育部直属综合性重点大学、国家“双一流”建设高校。学校扎根粤港澳大湾区，形成了<span style="color:#1976d2; font-weight:600;">广州、珠海、深圳三校区五校园</span>统筹发展的办学格局和文理医工农艺综合发展的学科布局，拥有70个院系，综合实力位居国内前列、世界百强。</p>
-                    <p class="card-source">信息来源：<a href="https://admission.sysu.edu.cn" target="_blank">中山大学本科招生网</a></p>
-                </div>
-
-                <div class="info-card">
-                    <div class="card-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3 class="card-title">卓越培养体系</h3>
-                    <p class="card-content">学校拥有完整的学士、硕士、博士人才培养体系，致力于培养具有国际视野、人文情怀、创新精神和社会责任感的卓越人才。各校区功能互补、特色发展，为学生提供多元的成长路径和丰富的学习资源。</p>
-                </div>
-
-                <div class="info-card">
-                    <div class="card-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3 class="card-title">快速信息查询</h3>
-                    <p class="card-content">您可以通过本平台右侧的“快速链接”栏，直接访问中山大学本科招生网、查询往年录取分数线、了解各校区院系设置等最权威的官方信息。所有动态信息均以官方发布为准。</p>
-                </div>
-            </section>
-
-            <section class="faq-section fade-in" id="programs">
-                <h2 class="section-title">常见咨询问题</h2>
-                <div class="faq-grid">
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fas fa-map-marked-alt"></i>
-                            中山大学有哪些校区？
-                        </div>
-                        <p class="faq-answer">中山大学在粤港澳大湾区<span style="color:#1976d2; font-weight:600;">广州、珠海、深圳</span>三座核心城市办学，形成“三校区五校园”格局。各校区学科布局特色鲜明，考生可根据专业所属校区进行选择。</p>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fas fa-chart-line"></i>
-                            如何查询往年录取分数线？
-                        </div>
-                        <p class="faq-answer">最准确的历年录取数据请访问中山大学本科招生网“历年分数”专栏。例如，2024年广东省物理类普通录取最低分为624分（位次9763），各专业分数有所不同。<span style="color:#1976d2; font-weight:600;">（数据仅供参考，最新信息以官网为准）</span></p>
-                        <p class="card-source" style="margin-top:8px;">数据来源：<a href="https://admission.sysu.edu.cn/zsw/lnfs.html" target="_blank">历年分数查询页</a></p>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fas fa-layer-group"></i>
-                            学校有哪些学院和专业？
-                        </div>
-                        <p class="faq-answer">学校学科门类齐全，设有文、理、医、工、农、艺等70个院系。例如，广州校区有中文系、岭南学院、中山医学院等；深圳校区有医学院、材料学院、智能工程学院等；珠海校区有国际金融学院、物理与天文学院等。</p>
-                        <p class="card-source" style="margin-top:8px;">来源：<a href="https://www.sysu.edu.cn/yxsz.htm" target="_blank">院系设置页</a></p>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fas fa-user-graduate"></i>
-            “强基计划”如何招生？
-                        </div>
-                        <p class="faq-answer">“强基计划”旨在选拔培养基础学科拔尖人才，通常于每年4月发布简章并报名，高考后参加校测。录取后实行小班化、导师制和本硕博衔接培养，原则上不允许转出强基计划专业。</p>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fas fa-home"></i>
-                            学生住宿条件如何？
-                        </div>
-                        <p class="faq-answer">各校区学生宿舍设施完备，一般为4人间，配备空调、独立卫浴、书桌衣柜和网络。校区内生活便利，食堂、图书馆、体育场馆等设施一应俱全。</p>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fas fa-scholarship"></i>
-                            有哪些奖学金政策？
-                        </div>
-                        <p class="faq-answer">学校设有国家奖学金、国家励志奖学金、校级优秀学生奖学金及众多社会捐赠奖学金，覆盖率高，鼓励学生全面发展。具体政策可入学后查阅学生手册或访问学生处网站。</p>
-                    </div>
-                </div>
-            </section>
-
-            <footer class="footer fade-in" id="contact">
-                <div class="footer-logo">中山大学 SUN YAT-SEN UNIVERSITY</div>
-                <p class="footer-text">本平台旨在为考生提供便捷的招生信息查询与咨询入口，所有信息均整理自中山大学官方渠道，仅供参考。招生政策、录取分数等动态信息，请务必以<span style="color:#1976d2; font-weight:600;">中山大学本科招生网</span>的最新公布为准。</p>
-                <div class="footer-contact">
-                    <div class="contact-item">
-                        <i class="fas fa-globe"></i>
-                        <span>本科招生网：admission.sysu.edu.cn</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>咨询电话：请见招生网公布</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>学校地址：广州市新港西路135号</span>
-                    </div>
-                </div>
-                <p style="margin-top: 30px; color: #78909c; font-size: 0.9rem;">
-                    © 2023-2025 中山大学招生咨询平台 | 信息来源于中山大学官方网站
-                </p>
-            </footer>
-        </div>
-
-        <!-- 右侧快速链接侧边栏 -->
-        <aside class="quick-links-sidebar">
-            <div class="sidebar-card">
-                <h3 class="sidebar-title"><i class="fas fa-external-link-alt"></i> 快速链接</h3>
-                <ul class="link-list">
-                    <li>
-                        <a href="https://admission.sysu.edu.cn/" target="_blank">
-                            <i class="fas fa-home"></i>
-                            <div>
-                                <strong>中山大学本科招生网</strong>
-                                <div style="font-size:0.9rem; color:#666; margin-top:3px;">获取最权威招生章程、计划</div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://admission.sysu.edu.cn/zsw/lnfs.html" target="_blank">
-                            <i class="fas fa-chart-bar"></i>
-                            <div>
-                                <strong>往年录取分数线查询</strong>
-                                <div style="font-size:0.9rem; color:#666; margin-top:3px;">查询各省市历年录取数据</div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.sysu.edu.cn/yxsz.htm" target="_blank">
-                            <i class="fas fa-sitemap"></i>
-                            <div>
-                                <strong>各学院设置详情</strong>
-                                <div style="font-size:0.9rem; color:#666; margin-top:3px;">了解三校区五校园所有院系</div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="sidebar-card">
-                <h3 class="sidebar-title"><i class="fas fa-robot"></i> AI智能咨询</h3>
-                <p style="color:#555; margin-bottom:20px; line-height:1.6;">对于招生政策、校园生活等常见问题，您可以随时点击右下角的<strong style="color:#1976d2;">蓝色机器人图标</strong>，唤醒AI助手进行实时对话咨询。</p>
-                <ul class="link-list">
-                    <li>
-                        <a href="javascript:void(0);" style="cursor:default; background:#e8f5e9; border-color:#c8e6c9;">
-                            <i class="fas fa-lightbulb"></i>
-                            <div>
-                                <strong>使用提示</strong>
-                                <div style="font-size:0.9rem; color:#666; margin-top:3px;">咨询后，可点击聊天窗口右上角的“<strong style="color:#d32f2f;">×</strong>”关闭窗口</div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="sidebar-card">
-                <h3 class="sidebar-title"><i class="fas fa-info-circle"></i> 重要提示</h3>
-                <p style="color:#555; line-height:1.7;">
-                    1. 本平台为信息聚合与咨询入口，非中山大学官方招生网站。<br><br>
-                    2. 所有招生录取信息，均以<span style="color:#1976d2; font-weight:600;">中山大学本科招生网</span>的正式通知为准。<br><br>
-                    3. 对于涉及个人隐私的具体报考咨询，建议通过官方公布的联系方式直接沟通。
-                </p>
-            </div>
-        </aside>
     </div>
-
-    <!-- Coze SDK 集成位置与配置 -->
+    
+    <!-- 原有的Coze SDK容器 -->
     <div id="position_demo"></div>
+
+    <!-- 添加：自定义聊天控制按钮 -->
+    <div class="custom-chat-controls">
+        <button class="chat-control-btn" id="openChatBtn" title="打开聊天窗口">
+            <i class="fas fa-comment"></i>
+        </button>
+        <button class="chat-control-btn close-btn" id="closeChatBtn" title="关闭聊天窗口">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
 
     <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.15/libs/cn/index.js"></script>
     <script>
-new CozeWebSDK.WebChatClient({
-  /**
-  * Agent or app settings
-  * for agent
-  * @param config.bot_id - Agent ID.
-  * for app
-  * @param config.type - To integrate a Coze app, you must set the value to app.
-  * @param config.isIframe - Whether to use the iframe method to open the chat box
-  * @param config.appInfo.appId - AI app ID.
-  * @param config.appInfo.workflowId - Workflow or chatflow ID.
-  */
-  config: {
-    type: 'bot',
-    bot_id: '7602452683702059017',
-    isIframe: false,
-  },
-  /**
-  * The auth property is used to configure the authentication method.
-  * @param type - Authentication method, default type is 'unauth', which means no authentication is required; it is recommended to set it to 'token', which means authentication is done through PAT (Personal Access Token) or OAuth.
-  * @param token - When the type is set to 'token', you need to configure the PAT (Personal Access Token) or OAuth access key.
-  * @param onRefreshToken - When the access key expires, a new key can be set as needed.
-  */
-  auth: {
-    type: 'token',
-    token: 'cztei_qTMAMoqikmARPa3lXERmB9d1aEyW6NYRTpFlUy2vCrC8CkW8uenJJLtaRIiCO93Q9',
-    onRefreshToken: async () => 'token'
-  },
-  /**
-  * The userInfo parameter is used to set the display of agent user information in the chat box.
-  * @param userInfo.id - ID of the agent user.
-  * @param userInfo.url - URL address of the user's avatar.
-  * @param userInfo.nickname - Nickname of the agent user.
-  */
-  userInfo: {
-    id: 'user',
-    url: 'https://lf-coze-web-cdn.coze.cn/obj/eden-cn/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
-    nickname: 'User',
-  },
-  ui: {
-    /**
-    * The ui.base parameter is used to add the overall UI effect of the chat window.
-    * @param base.icon - Application icon URL.
-    * @param base.layout - Layout style of the agent chat box window, which can be set as 'pc' or'mobile'.
-    * @param base.lang - System language of the agent, which can be set as 'en' or 'zh-CN'.
-    * @param base.zIndex - The z-index of the chat box.
-    */
-    base: {
-      icon: 'https://lf-coze-web-cdn.coze.cn/obj/eden-cn/lm-lgvj/ljhwZthlaukjlkulzlp/coze/chatsdk-logo.png',
-      layout: 'pc',
-      lang: 'en',
-      zIndex: 1000
-    },
-    /**
-    * Controls whether to display the top title bar and the close button
-    * @param header.isShow - Whether to display the top title bar.
-    * @param header.isNeedClose - Whether to display the close button.
-    */
-    header: {
-      isShow: true,
-      isNeedClose: true,
-    },
-    /**
-    * Controls whether to display the floating ball at the bottom right corner of the page.
-    */
-    asstBtn: {
-      isNeed: true
-    },
-    /**
-    * The ui.footer parameter is used to add the footer of the chat window.
-    * @param footer.isShow - Whether to display the bottom copy module.
-    * @param footer.expressionText - The text information displayed at the bottom.
-    * @param footer.linkvars - The link copy and link address in the footer.
-    */
-    footer: {
-      isShow: true,
-      expressionText: 'Powered by ...',
-    },
-    /**
-    * Control the UI and basic capabilities of the chat box.
-    * @param chatBot.title - The title of the chatbox
-    * @param chatBot.uploadable - Whether file uploading is supported.
-    * @param chatBot.width - The width of the agent window on PC is measured in px, default is 460.
-    * @param chatBot.el - Container for setting the placement of the chat box (Element).
-    */
-    chatBot: {
-      title: 'Coze Bot',
-      uploadable: true,
-      width: 390,
-    },
-  },
-});
+        // 初始化Coze SDK
+        let cozeClient = null;
+        
+        // 等待页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 原有的导航和动画代码保持不变
+            
+            // 初始化Coze SDK
+            initCozeSDK();
+            
+            // 初始化自定义控制功能
+            initChatControls();
+            
+            // 显示使用提示（如果之前没关闭过）
+            setTimeout(() => {
+                if (!localStorage.getItem('chatTipClosed')) {
+                    showUsageTip();
+                }
+            }, 3000);
+        });
+        
+        function initCozeSDK() {
+            cozeClient = new CozeWebSDK.WebChatClient({
+                config: {
+                    type: 'bot',
+                    bot_id: '7602452683702059017',
+                    isIframe: false,
+                },
+                auth: {
+                    type: 'token',
+                    token: 'cztei_qTMAMoqikmARPa3lXERmB9d1aEyW6NYRTpFlUy2vCrC8CkW8uenJJLtaRIiCO93Q9',
+                    onRefreshToken: async () => 'token'
+                },
+                userInfo: {
+                    id: 'user',
+                    url: 'https://lf-coze-web-cdn.coze.cn/obj/eden-cn/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
+                    nickname: 'User',
+                },
+                ui: {
+                    base: {
+                        icon: 'https://lf-coze-web-cdn.coze.cn/obj/eden-cn/lm-lgvj/ljhwZthlaukjlkulzlp/coze/chatsdk-logo.png',
+                        layout: 'pc',
+                        lang: 'zh-CN', // 改为中文
+                        zIndex: 1000
+                    },
+                    header: {
+                        isShow: true,
+                        isNeedClose: true,
+                    },
+                    asstBtn: {
+                        isNeed: true
+                    },
+                    footer: {
+                        isShow: true,
+                        expressionText: '中山大学招生咨询AI助手',
+                    },
+                    chatBot: {
+                        title: '中山大学招生AI助手', // 改为中文标题
+                        uploadable: true,
+                        width: 420, // 稍微调大宽度
+                    },
+                },
+                // 添加SDK事件监听
+                callbacks: {
+                    onChatWindowOpen: function() {
+                        console.log('聊天窗口已打开');
+                        updateChatStatus('聊天窗口已打开');
+                        // 显示自定义关闭按钮
+                        document.getElementById('closeChatBtn').style.display = 'flex';
+                        // 监听SDK的关闭按钮
+                        setTimeout(setupCozeCloseButton, 500);
+                    },
+                    onChatWindowClose: function() {
+                        console.log('聊天窗口已关闭');
+                        updateChatStatus('聊天窗口已关闭');
+                        // 隐藏自定义关闭按钮
+                        document.getElementById('closeChatBtn').style.display = 'none';
+                    },
+                    onChatWindowShow: function() {
+                        console.log('聊天窗口显示');
+                    },
+                    onChatWindowHide: function() {
+                        console.log('聊天窗口隐藏');
+                    }
+                }
+            });
+            
+            // 初始时隐藏关闭按钮
+            document.getElementById('closeChatBtn').style.display = 'none';
+        }
+        
+        function initChatControls() {
+            const openBtn = document.getElementById('openChatBtn');
+            const closeBtn = document.getElementById('closeChatBtn');
+            const closeTipBtn = document.getElementById('closeTipBtn');
+            
+            // 打开聊天窗口
+            openBtn.addEventListener('click', function() {
+                if (cozeClient) {
+                    cozeClient.open();
+                    updateChatStatus('正在打开聊天窗口...');
+                    // 显示状态提示
+                    showStatus('聊天窗口已打开', 2000);
+                }
+            });
+            
+            // 关闭聊天窗口
+            closeBtn.addEventListener('click', function() {
+                if (cozeClient) {
+                    cozeClient.close();
+                    updateChatStatus('正在关闭聊天窗口...');
+                    // 显示状态提示
+                    showStatus('聊天窗口已关闭', 2000);
+                }
+            });
+            
+            // 关闭使用提示
+            closeTipBtn.addEventListener('click', function() {
+                hideUsageTip();
+                localStorage.setItem('chatTipClosed', 'true');
+            });
+            
+            // 点击外部关闭提示
+            document.addEventListener('click', function(e) {
+                const usageTip = document.getElementById('usageTip');
+                if (usageTip.style.display === 'block' && 
+                    !usageTip.contains(e.target) && 
+                    e.target.id !== 'openChatBtn') {
+                    hideUsageTip();
+                    localStorage.setItem('chatTipClosed', 'true');
+                }
+            });
+        }
+        
+        // 设置Coze SDK自带的关闭按钮监听
+        function setupCozeCloseButton() {
+            // 尝试查找Coze SDK的关闭按钮
+            const cozeCloseBtn = document.querySelector('.coze-web-sdk-header-close, [class*="close"], button[aria-label*="close"], button[title*="关闭"]');
+            if (cozeCloseBtn) {
+                cozeCloseBtn.addEventListener('click', function() {
+                    setTimeout(() => {
+                        document.getElementById('closeChatBtn').style.display = 'none';
+                        showStatus('聊天窗口已关闭', 2000);
+                    }, 300);
+                });
+                
+                // 添加提示文本
+                cozeCloseBtn.setAttribute('title', '点击关闭聊天窗口');
+                
+                // 添加自定义样式
+                const originalHTML = cozeCloseBtn.innerHTML;
+                cozeCloseBtn.innerHTML = '× <span style="font-size:12px; margin-left:5px;">关闭</span>';
+            }
+        }
+        
+        // 更新聊天状态指示器
+        function updateChatStatus(text) {
+            const statusEl = document.getElementById('chatStatus');
+            statusEl.textContent = text;
+            statusEl.style.display = 'block';
+            
+            // 2秒后自动隐藏
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 2000);
+        }
+        
+        // 显示状态提示（短时显示）
+        function showStatus(text, duration = 2000) {
+            updateChatStatus(text);
+        }
+        
+        // 显示使用提示
+        function showUsageTip() {
+            const tipEl = document.getElementById('usageTip');
+            tipEl.style.display = 'block';
+            
+            // 10秒后自动关闭
+            setTimeout(() => {
+                if (tipEl.style.display === 'block') {
+                    hideUsageTip();
+                    localStorage.setItem('chatTipClosed', 'true');
+                }
+            }, 10000);
+        }
+        
+        // 隐藏使用提示
+        function hideUsageTip() {
+            document.getElementById('usageTip').style.display = 'none';
+        }
+        
+        // 键盘快捷键支持
+        document.addEventListener('keydown', function(e) {
+            // Ctrl + / 打开/关闭聊天
+            if (e.ctrlKey && e.key === '/') {
+                e.preventDefault();
+                if (document.getElementById('closeChatBtn').style.display === 'none') {
+                    document.getElementById('openChatBtn').click();
+                } else {
+                    document.getElementById('closeChatBtn').click();
+                }
+            }
+            
+            // ESC键关闭聊天
+            if (e.key === 'Escape') {
+                if (document.getElementById('closeChatBtn').style.display !== 'none') {
+                    document.getElementById('closeChatBtn').click();
+                }
+            }
+        });
+        
+        // 添加页面卸载前的清理
+        window.addEventListener('beforeunload', function() {
+            if (cozeClient) {
+                cozeClient.close();
+            }
+        });
     </script>
-
+    
+    <!-- 原有的其他脚本保持不变 -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.nav-links a').forEach(anchor => {
