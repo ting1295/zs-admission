@@ -1,0 +1,34 @@
+<script>
+
+const cozeWebSDK = new CozeWebSDK.WebChatClient({
+
+config: {
+
+// 智能体 ID
+
+botId: '7602452683702059017',
+
+},
+
+auth: {
+
+// 鉴权方式
+
+type: 'token',
+
+// 鉴权密钥
+
+token: 'pat_W9Jr5VDI1vLBm2Qrmr6AYCtNM1dTwwRWvvlt4q2SZuS0z9apK69n8LNClYOkH2pE',
+
+// 备用密钥
+
+onRefreshToken: () => 'pat_W9Jr5VDI1vLBm2Qrmr6AYCtNM1dTwwRWvvlt4q2SZuS0z9apK69n8LNClYOkH2pE',
+
+}
+
+});
+
+</script>
+————————————————
+版权声明：本文为CSDN博主「润雨的AI开源日记」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/weixin_47115107/article/details/146284985
